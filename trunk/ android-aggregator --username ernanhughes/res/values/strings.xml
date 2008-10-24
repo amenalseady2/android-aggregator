@@ -4,7 +4,7 @@
     <string name="app_name">RSS Aggregator</string>
 
     <string name="menu_delete">Delete</string>
-    <string name="menu_insert">Add note</string>
+    <string name="menu_insert">Add Feed</string>
     <string name="menu_revert">Revert</string>
     <string name="menu_discard">Discard</string>
 

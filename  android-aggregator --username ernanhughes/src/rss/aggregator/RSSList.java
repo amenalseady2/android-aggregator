@@ -1,5 +1,6 @@
 package rss.aggregator;
 
+import rss.aggregator.RSSFeeds.Feed;
 import android.app.ListActivity;
 import android.content.ComponentName;
 import android.content.ContentUris;
@@ -44,7 +45,7 @@ public class RSSList extends ListActivity {
         // as a MAIN activity), then use our default content provider.
         Intent intent = getIntent();
         if (intent.getData() == null) {
-            intent.setData(Notes.CONTENT_URI);
+            intent.setData(Feed.CONTENT_URI);
         }
 
         // Inform the list we provide context menus for items
@@ -53,11 +54,11 @@ public class RSSList extends ListActivity {
         // Perform a managed query. The Activity will handle closing and requerying the cursor
         // when needed.
         Cursor cursor = managedQuery(getIntent().getData(), PROJECTION, null, null,
-                Notes.DEFAULT_SORT_ORDER);
+                Feed.DEFAULT_SORT_ORDER);
 
         // Used to map notes entries from the database to views
         SimpleCursorAdapter adapter = new SimpleCursorAdapter(this, R.layout.noteslist_item, cursor,
-                new String[] { Notes.TITLE }, new int[] { android.R.id.text1 });
+                new String[] { Feed.TITLE }, new int[] { android.R.id.text1 });
         setListAdapter(adapter);
     }
 
@@ -78,7 +79,7 @@ public class RSSList extends ListActivity {
         Intent intent = new Intent(null, getIntent().getData());
         intent.addCategory(Intent.CATEGORY_ALTERNATIVE);
         menu.addIntentOptions(Menu.CATEGORY_ALTERNATIVE, 0, 0,
-                new ComponentName(this, NotesList.class), null, intent, 0, null);
+                new ComponentName(this, RSSList.class), null, intent, 0, null);
 
         return true;
     }
